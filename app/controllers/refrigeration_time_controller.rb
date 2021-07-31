@@ -14,10 +14,11 @@ class RefrigerationTimeController < ApplicationController
     }
 
     # Queries
-    cache_table_record = ActiveRecord::Base.connection.execute sql
+    cache_table_records = ActiveRecord::Base.connection.execute sql
     curr_location = Location.find(location_id)
 
-    if cache_table_record
+    if cache_table_records
+      cache_table_record = cache_table_records.first
       new_time_outside = cache_table_record[:time_outside] 
       unless cache_table_record[:prev_loc_is_freezer]
         new_time_outside += (timestamp - cache_table_record[:last_time_stamp])
@@ -54,7 +55,7 @@ class RefrigerationTimeController < ApplicationController
 
     # Queries
     cache_table_record = ActiveRecord::Base.connection.execute sql
-    @outTime = cache_table_record ? cache_table_record[:time_outside] : 0
+    @outTime = cache_table_record ? cache_table_record.first[:time_outside] : 0
   end
 
   def reset
@@ -67,7 +68,7 @@ class RefrigerationTimeController < ApplicationController
       DELETE FROM locations WHERE TRUE
     }
     ActiveRecord::Base.connection.execute sql
-    
+
     redirect_to root_path
   end
 
