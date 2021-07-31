@@ -9,10 +9,16 @@
         <%= form.number_field :timestamp %>
         <%= form.submit "Update Out Time", class: "btn btn-primary" %>
     <% end %>
+
     <hr />
     <%= form_with url: get_out_time_path, class: "my-2", method: :get do |form| %>
         <%= form.label :item_id, "Item ID" %>
         <%= form.number_field :item_id %>
         <%= form.submit "Get Out Time", class: "btn btn-primary" %>
+    <% end %>
+
+    <hr />
+    <%= form_with url: reset_path, class: "my-2", method: :post do |form| %>
+        <%= form.submit "Reset", class: "btn btn-primary" %>
     <% end %>
 </div>

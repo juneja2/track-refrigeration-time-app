@@ -57,6 +57,20 @@ class RefrigerationTimeController < ApplicationController
     @outTime = cache_table_record ? cache_table_record[:time_outside] : 0
   end
 
+  def reset
+    sql = %{
+      DELETE FROM cache_tables WHERE TRUE
+    }
+    ActiveRecord::Base.connection.execute sql
+
+    sql = %{
+      DELETE FROM locations WHERE TRUE
+    }
+    ActiveRecord::Base.connection.execute sql
+    
+    redirect_to root_path
+  end
+
   private
     def updateOutTimeParams
       params.permit(:item_id, :location_id, :timestamp)
