@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="display-3 my-2">Welcome to the Track Refrigeration Time App.</h1>
-    <%= form_with url: update_out_time_path, class: "my-2", method: :get do |form| %>
+    <%= form_with url: update_out_time_path, class: "my-2", method: :post do |form| %>
         <%= form.label :item_id, "Item ID" %>
         <%= form.number_field :item_id %>
         <%= form.label :location_id, "Location ID" %>
@@ -10,5 +10,9 @@
         <%= form.submit "Update Out Time", class: "btn btn-primary" %>
     <% end %>
     <hr />
-    <%= link_to "Get Out Time", get_out_time_path, class: "btn btn-primary" %>
+    <%= form_with url: get_out_time_path, class: "my-2", method: :get do |form| %>
+        <%= form.label :item_id, "Item ID" %>
+        <%= form.number_field :item_id %>
+        <%= form.submit "Get Out Time", class: "btn btn-primary" %>
+    <% end %>
 </div>
