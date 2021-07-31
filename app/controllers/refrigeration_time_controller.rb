@@ -17,7 +17,13 @@ class RefrigerationTimeController < ApplicationController
     cache_table_records = ActiveRecord::Base.connection.execute sql
     curr_location = Location.find(location_id)
 
-    if cache_table_records
+    if cache_table_records.count == 0
+      # If you don't have a cache_record => you are in a refrigerator
+      new_time_outside = 0
+      sql = %{
+        INSERT INTO cache_tables (#{item_id}, #{new_time_outside}, #{curr_location[:is_freezer]}, #{timestamp})
+      }
+    else
       cache_table_record = cache_table_records.first
       new_time_outside = cache_table_record[:time_outside] 
       unless cache_table_record[:prev_loc_is_freezer]
@@ -30,12 +36,6 @@ class RefrigerationTimeController < ApplicationController
         SET prev_loc_is_freezer = #{curr_location[:is_freezer]}
         SET last_time_stamp     = #{timestamp}
         WHERE item_id           = #{item_id}
-      }
-    else
-      # If you don't have a cache_record => you are in a refrigerator
-      new_time_outside = 0
-      sql = %{
-        INSERT INTO cache_tables (#{item_id}, #{new_time_outside}, #{curr_location[:is_freezer]}, #{timestamp})
       }
     end
 
@@ -55,7 +55,7 @@ class RefrigerationTimeController < ApplicationController
 
     # Queries
     cache_table_record = ActiveRecord::Base.connection.execute sql
-    @outTime = cache_table_record ? cache_table_record.first[:time_outside] : 0
+    @outTime = cache_table_record.count == 0 ? 0 : cache_table_record.first[:time_outside]
   end
 
   def reset
