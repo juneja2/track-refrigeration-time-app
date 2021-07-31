@@ -2,11 +2,11 @@
     <h1 class="display-3 my-2">Welcome to the Track Refrigeration Time App.</h1>
     <%= form_with url: "/search", class: "my-2", method: :get do |form| %>
         <%= form.label :item_id, "Item ID" %>
-        <%= form.text_field :item_id %>
+        <%= form.number_field :item_id %>
         <%= form.label :location_id, "Location ID" %>
-        <%= form.text_field :location_id %>
-        <%= form.label :timestamp, "Timestamp" %>
-        <%= form.text_field :timestamp %>
+        <%= form.number_field :location_id %>
+        <%= form.label :timestamp, "Timestamp(in seconds)" %>
+        <%= form.number_field :timestamp %>
         <%= form.submit "Update Out Time", class: "btn btn-primary" %>
     <% end %>
     <hr />
