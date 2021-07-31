@@ -1,0 +1,2 @@
+module RefrigerationTimeHelper
+end
