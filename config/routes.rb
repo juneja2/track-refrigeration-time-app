@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: "refrigeration_time#index"
   get "/getOutTime",     to: "refrigeration_time#getOutTime",    as: :get_out_time
   post "/UpdateOutTime", to: "refrigeration_time#updateOutTime", as: :update_out_time
-  post "/reset",         to: "refrigeration_time#reset",         as: :reset_path
+  post "/reset",         to: "refrigeration_time#reset",         as: :reset
 end
