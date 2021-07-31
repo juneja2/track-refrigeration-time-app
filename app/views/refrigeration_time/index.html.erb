@@ -1,2 +1,14 @@
-<h1 class="display-1">RefrigerationTime#index</h1>
-<p>Find me in app/views/refrigeration_time/index.html.erb</p>
+<div class="container">
+    <h1 class="display-3 my-2">Welcome to the Track Refrigeration Time App.</h1>
+    <%= form_with url: "/search", class: "my-2", method: :get do |form| %>
+        <%= form.label :item_id, "Item ID" %>
+        <%= form.text_field :item_id %>
+        <%= form.label :location_id, "Location ID" %>
+        <%= form.text_field :location_id %>
+        <%= form.label :timestamp, "Timestamp" %>
+        <%= form.text_field :timestamp %>
+        <%= form.submit "Update Out Time", class: "btn btn-primary" %>
+    <% end %>
+    <hr />
+    <button class="btn btn-primary" type="button">Get Out Time</button>
+</div>
