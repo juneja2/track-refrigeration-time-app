@@ -48,7 +48,7 @@ class RefrigerationTimeController < ApplicationController
     sql = %{
       SELECT * 
       FROM cache_tables 
-      WHERE item_id = #{item_id}
+      WHERE item_id = #{@item_id}
       LIMIT 1
     }
 
