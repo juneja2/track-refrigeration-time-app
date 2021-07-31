@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_31_210604) do
+ActiveRecord::Schema.define(version: 2021_07_31_211000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cache_tables", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "time_outside"
+    t.boolean "prev_loc_is_freezer"
+    t.bigint "last_time_stamp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_cache_tables_on_item_id", unique: true
+  end
 
   create_table "locations", force: :cascade do |t|
     t.boolean "is_freezer"
