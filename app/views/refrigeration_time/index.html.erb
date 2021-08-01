@@ -1,5 +1,15 @@
 <div class="container">
     <h1 class="display-3 my-2">Welcome to the Track Refrigeration Time App.</h1>
+
+    <div>
+      <ul>
+        <li>Location Id [1, 6] inclusive are refrigerators.</li>
+        <li>Location Id [7, 12] inclusive are not refrigerators.</li>
+        <li>Reset will make total time spent outside a refrigerator equal to 0.</li>
+        <li>Location Id's remain active even during the reset.</li>
+      </ul>
+    </div>
+
     <%= form_with url: update_out_time_path, class: "my-2", method: :post do |form| %>
         <%= form.label :item_id, "Item ID" %>
         <%= form.number_field :item_id %>
