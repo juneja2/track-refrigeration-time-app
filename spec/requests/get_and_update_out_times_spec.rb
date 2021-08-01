@@ -43,5 +43,24 @@ RSpec.describe "refrigeration times", type: :request do
         expect(response.body).to include("0 seconds")
       end
     end
+
+    describe "get out time when randomly moving beween refrigerators and facilites" do
+      it "should be 75 seconds and 575 seconds outside refrigerator" do
+        post update_out_time_path, params: { item_id: 2, location_id: 0, timestamp: 5 }
+        post update_out_time_path, params: { item_id: 2, location_id: 3, timestamp: 125 }
+        post update_out_time_path, params: { item_id: 2, location_id: 2, timestamp: 200 }
+
+        follow_redirect!
+        expect(response.body).to include("75 seconds")
+
+        post update_out_time_path, params: { item_id: 2, location_id: 5, timestamp: 300 }
+        post update_out_time_path, params: { item_id: 2, location_id: 4, timestamp: 400 }
+        post update_out_time_path, params: { item_id: 2, location_id: 1, timestamp: 800 }
+
+        follow_redirect!
+        expect(response.body).to include("Item Id: 2")
+        expect(response.body).to include("575 seconds")
+      end
+    end
   end
 end
