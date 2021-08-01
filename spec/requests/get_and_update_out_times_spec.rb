@@ -35,8 +35,12 @@ RSpec.describe "refrigeration times", type: :request do
       it "should be 0 seconds outside refrigerator" do
         post update_out_time_path, params: { item_id: 2, location_id: 0, timestamp: 5 }
         post update_out_time_path, params: { item_id: 2, location_id: 1, timestamp: 120 }
-        # post update_out_time_path, params: { item_id: 2, location_id: 2, timestamp: 200 }
-        # post update_out_time_path, params: { item_id: 2, location_id: 3, timestamp: 2412 }
+        post update_out_time_path, params: { item_id: 2, location_id: 2, timestamp: 200 }
+        post update_out_time_path, params: { item_id: 2, location_id: 3, timestamp: 2412 }
+
+        get get_out_time_path, params: { item_id: 2 }
+        expect(response.body).to include("Item Id: 2")
+        expect(response.body).to include("0 seconds")
       end
     end
   end
