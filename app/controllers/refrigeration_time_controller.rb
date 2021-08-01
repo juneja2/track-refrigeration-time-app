@@ -64,12 +64,7 @@ class RefrigerationTimeController < ApplicationController
       DELETE FROM cache_tables WHERE TRUE
     }
     ActiveRecord::Base.connection.execute sql
-
-    sql = %{
-      DELETE FROM locations WHERE TRUE
-    }
-    ActiveRecord::Base.connection.execute sql
-
+    
     redirect_to root_path
   end
 
