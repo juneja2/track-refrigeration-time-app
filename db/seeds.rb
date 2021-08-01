@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+for i in 0..5
+  Location.create(is_freezer: true)
+end
+
+for i in 0..5
+  Location.create(is_freezer: false)
+end
