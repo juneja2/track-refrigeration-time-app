@@ -33,9 +33,9 @@ class RefrigerationTimeController < ApplicationController
 
       sql = %{
         UPDATE cache_tables
-        SET time_outside        = #{new_time_outside}
-        SET prev_loc_is_freezer = #{curr_location[:is_freezer]}
-        SET last_time_stamp     = #{timestamp}
+        SET time_outside        = #{new_time_outside},
+            prev_loc_is_freezer = #{curr_location[:is_freezer]},
+            last_time_stamp     = #{timestamp}
         WHERE item_id           = #{item_id}
       }
     end
