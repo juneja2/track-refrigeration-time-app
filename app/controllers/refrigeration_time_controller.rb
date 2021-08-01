@@ -21,7 +21,8 @@ class RefrigerationTimeController < ApplicationController
       # If you don't have a cache_record => you are in a refrigerator
       new_time_outside = 0
       sql = %{
-        INSERT INTO cache_tables (#{item_id}, #{new_time_outside}, #{curr_location[:is_freezer]}, #{timestamp})
+        INSERT INTO cache_tables (item_id, time_outside, prev_loc_is_freezer, last_time_stamp)
+        VALUES (#{item_id}, #{new_time_outside}, #{curr_location[:is_freezer]}, #{timestamp})
       }
     else
       cache_table_record = cache_table_records.first

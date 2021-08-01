@@ -1,0 +1,10 @@
+<% for i in 0..2 %>
+Refrigerator_<%= i %>:
+  id: <%= i %>
+  is_freezer: true
+
+Factory_<%= i %>:
+  id: <%= i + 3 %>
+  is_freezer: false
+<% end %>
+
