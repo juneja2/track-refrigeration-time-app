@@ -26,9 +26,9 @@ class RefrigerationTimeController < ApplicationController
       }
     else
       cache_table_record = cache_table_records.first
-      new_time_outside = cache_table_record[:time_outside] 
-      unless cache_table_record[:prev_loc_is_freezer]
-        new_time_outside += (timestamp.to_i - cache_table_record[:last_time_stamp])
+      new_time_outside = cache_table_record["time_outside"] 
+      unless cache_table_record["prev_loc_is_freezer"]
+        new_time_outside += (timestamp.to_i - cache_table_record["last_time_stamp"])
       end
 
       sql = %{
@@ -56,7 +56,7 @@ class RefrigerationTimeController < ApplicationController
 
     # Queries
     cache_table_record = ActiveRecord::Base.connection.execute sql
-    @outTime = cache_table_record.count == 0 ? 0 : cache_table_record.first[:time_outside]
+    @outTime = cache_table_record.count == 0 ? 0 : cache_table_record.first["time_outside"]
   end
 
   def reset
