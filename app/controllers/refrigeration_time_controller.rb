@@ -28,7 +28,7 @@ class RefrigerationTimeController < ApplicationController
       cache_table_record = cache_table_records.first
       new_time_outside = cache_table_record[:time_outside] 
       unless cache_table_record[:prev_loc_is_freezer]
-        new_time_outside += (timestamp - cache_table_record[:last_time_stamp])
+        new_time_outside += (timestamp.to_i - cache_table_record[:last_time_stamp])
       end
 
       sql = %{
@@ -41,7 +41,7 @@ class RefrigerationTimeController < ApplicationController
     end
 
     ActiveRecord::Base.connection.execute sql
-    redirect_to get_out_time_path
+    redirect_to get_out_time_path(item_id: item_id)
   end
 
   def getOutTime
